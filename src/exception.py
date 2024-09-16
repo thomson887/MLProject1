@@ -1,5 +1,5 @@
 import sys # all exceptions will be handled by sys
-import logging
+from src.logger import logging
 
 def error_message_detail(error, error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()    # on which file and which line the exception has occurred.
