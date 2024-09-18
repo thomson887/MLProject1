@@ -10,6 +10,9 @@ from dataclasses import dataclass #used to create class variables
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
 
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 @dataclass #A decorator that automatically adds special methods to the class (like __init__, __repr__, etc) based on the class attributes (in this case attributes are train_data_path..).
 class DataIngestionConfig:
     """Any data which is required will be obtained using this"""
@@ -52,5 +55,10 @@ if __name__ == "__main__":
     obj=DataIngestion()
     train_data_path, test_data_path = obj.initiate_data_ingestion()
 
+    #data transformation
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data_path, test_data_path)
+    train_arr, test_arr,_ = data_transformation.initiate_data_transformation(train_data_path, test_data_path)
+
+    #model training
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr, test_arr))
